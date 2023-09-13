@@ -2,69 +2,49 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,300&family=Montserrat:ital,wght@1,300&family=Rye&family=Special+Elite&display=swap");
 
-/* Center the entire page horizontally */
-
-/* Reset some default styles */
-/* Reset some default styles */
+/* Center-align text and use the Kanit font  */
 body {
-    text-align: center;
-    font-family: Kanit, sans-serif;
-  }
-  
-  /* Style the form */
-  #addArtForm {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-  }
-  
-  /* Style the custom file input button */
-  .custom-file-input-button {
-    display: block;
-    width: 90%;
-    padding: 10px;
-    background-color: #0f161b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  .custom-file-input-button:hover {
-    background-color: #1a2328;
-  }
-  
-  /* Style labels */
-  label {
-    font-family: Kanit, sans-serif;
-    font-weight: 500;
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  /* Style text inputs */
-  input[type="text"] {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* Style error messages */
-  #errorMessage {
-    color: red;
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  
-  /* Center-align each image within the gallery and add spacing */
-  #gallery img {
-    margin: 20px;
-  }
+  text-align: center;
+  font-family: Kanit, sans-serif;
+}
+
+.title {
+  font-size: 50px;
+  text-shadow: 2px 2px #0f161b;
+}
+
+/* Style the form */
+#addArtForm {
+  max-width: 400px; /* Set maximum width for the form */
+  margin: 0 auto; /* Center the form horizontally */
+  padding: 20px; /* Add padding around the form content */
+  background-color: #f0f0f0; /* Set background color */
+  border-radius: 10px; /* Add rounded corners to the form */
+}
 
 
+/* Style the custom file input button */
+.custom-file-input-button {
+  display: block; /* Make the button a block-level element */
+  width: 90%; /* Set the button's width */
+  padding: 10px; /* Add padding inside the button */
+  background-color: #0f161b; /* Set button background color */
+  color: white; /* Set text color */
+  border: none; /* Remove borders */
+  border-radius: 5px; /* Add rounded corners to the button */
+  cursor: pointer; /* Change cursor to a pointer when hovering */
+  text-align: center; /* Center-align text within the button */
+  transition: background-color 0.3s ease; /* Add smooth background color transition */
+}
+
+.custom-file-input-button:hover {
+  background-color: 	#bf00ff ; /* Change background color on hover */
+}
+
+/* Center-align each image within the gallery and add spacing */
+#gallery img {
+  width: 200px; /* Set width for gallery images */
+  height: 200px; /* Set height for gallery images */
+  margin: 40px; /* Add spacing around each image */
  
+}

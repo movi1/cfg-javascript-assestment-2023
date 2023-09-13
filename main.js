@@ -1,140 +1,73 @@
 
-// Artwork array
-let gallery = [];
 
-// Handle form submit
-//    document.getElementById('addArtForm').addEventListener('submit', function (e) {
-//        // Prevent page reload
-//        e.preventDefault();
 
-//        // Prompt the user for what they are looking for
-//        const searchValue = prompt('What are you looking for?');
 
-//        // Check if the user entered a search term
-//        if (searchValue !== null) {
-//            // Get input value
-//            let newArtwork = document.getElementById('artwork').value;
+// Use a data structure like an array to store values - Gallery array to store uploaded images
+let gallery = ['./images/sea.jpg', './images/piano.JPG', './images/me.JPG', './images/bubblesea.jpg'];
 
-//            // Add to array
-//            gallery.push(newArtwork);
 
-//            // Render gallery
-//            displayGallery();
+let h1Elements = document.getElementsByClassName("title");
 
-//            // Display the artwork name and search term
-//            alert(`You entered "${newArtwork}" and you are looking for: ${searchValue}`);
-//        }
-//    });
-
-//    // Display thumbnails
-//    function displayGallery() {
-//        // Clear current gallery
-//        document.getElementById('gallery').innerHTML = '';
-
-//        // Loop through array
-//        for (let i = 0; i < gallery.length; i++) {
-//            // Create element
-//            let thumb = document.createElement('img');
-//            thumb.src = 'thumbnails/' + gallery[i] + '.jpg';
-
-//            // Add to gallery
-//            document.getElementById('gallery').appendChild(thumb);
-//        }
-//    }
-
-// Function to handle image upload
-// Function to handle image upload
-function handleImageUpload() {
-    // Your existing image upload logic here
+for (let i = 0; i < h1Elements.length; i++) {
+   // Make changes to the HTML or CSS using JavaScript
+  h1Elements[i].style.color = 	"#bf00ff";
 }
 
-// Function to prompt the user
-function promptUser(imageName) {
-    window.alert("Congratulations! " + imageName + " was added to the gallery");
+// Use functions to make code reusable - Function to handle image upload and update the gallery
+function handleImageUpload(img) {
+  gallery.push(img.src);
+  updateGallery();
+   //Alert user of upload
+    promptUser();
 }
 
+// Use console.log and alert appropriately to display messages-Display alert to user
+function promptUser() {
 
+  console.log('Prompting user about upload...');
 
-// // run this code once the HTML and CSS are loaded
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Select the element with the class name
-//     let titles = document.getElementsByClassName("title");
-//     // Loop through all the p tags and change their styling
-//     for (let i = 0; i < titles.length; i++) {
-//         titles[i].style.color = "#1a2328";
-//     }
+  window.alert("Congratulations! Your image was added to the gallery");
 
-//     const imageInput = document.getElementById('imageInput');
-//     const imageContainer = document.getElementById('imageContainer');
-//     const errorMessage = document.getElementById('errorMessage');
-//     const maxSizeInKB = 900; // 1MB in KB (adjust as needed)
+}
 
-//     imageInput.addEventListener('change', () => {
-//         const file = imageInput.files[0];
-        
-//         if (file) {
-//           const reader = new FileReader();
-      
-//           reader.onload = e => {
-//             const img = new Image();
-//             img.src = e.target.result;
-      
-//             img.onload = () => {
-//               const canvas = document.createElement('canvas');
-//               const ctx = canvas.getContext('2d');
-      
-//               const maxWidth = 900;
-//               const scaleFactor = maxWidth / img.width;
-      
-//               canvas.width = img.width * scaleFactor; 
-//               canvas.height = img.height * scaleFactor;
-      
-//               ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      
-//               const thumbnail = new Image();
-//               thumbnail.src = canvas.toDataURL('image/jpeg', 0.7);
-//               thumbnail.style.maxWidth = '100%';
-//               thumbnail.style.height = 'auto';
-      
-//               imageContainer.appendChild(thumbnail);
-      
-//               promptUser(file.name);
-//             }
-//           };
-      
-//           reader.readAsDataURL(file);
-//         }
-      
-//         imageInput.value = '';
-//       });
+// Use functions to make code reusable - Function to update the gallery with images from the array
+function updateGallery() {
+  const container = document.getElementById('gallery');
+  container.innerHTML = '';
 
-    
-// });
+  // Use a loop or a while loop to reduce repetition
+  for (let imgSrc of gallery) {
+    // Make changes to the HTML or CSS using JavaScript
+    let img = document.createElement('img');
+    img.src = imgSrc;
+    container.appendChild(img);
+  }
+}
+
+// Get input from the user on a web page - Get file input element
 const input = document.getElementById('imageInput');
-const container = document.getElementById('gallery');
 
-input.addEventListener('change', function() {
+// Use an event to trigger a change to a web page - When file input changes (image selected)
+input.addEventListener('change', function () {
   let files = this.files;
 
-  console.log(files)
-  
-  for (let i = 0; i < files.length; i++) {
-    let file = files[i];
+  //Use a loop or a while loop to reduce repetition
+  for (let file of files) {
 
-    let img = document.createElement('img');
-    img.setAttribute('width', '200');
-    img.setAttribute('height', '200');
-    // img.className = 'classnamehere';
-    img.src = URL.createObjectURL(file);
-
-    console.log(img.src)
-
-    let div = document.createElement('div');
-    div.textContent = file.name;
-
-    container.appendChild(img);
-    container.appendChild(div);
-
-    promptUser(file.name);
+    // Use boolean values and if..else statements to branch logic of your program - checks if file is image
+    let isFileImageBoolean = file.type.startsWith('image/')
+    console.log(isFileImageBoolean)
+    if (isFileImageBoolean) { // Check if the file is an image
+      let img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      handleImageUpload(img);
+    } else {
+      //Use console.log and alert appropriately to display messages
+      console.log('Invalid file type');
+      alert('Please uplode an image file only');
+    }
   }
 });
+
+// Use an event to trigger a change to a web page - Initialize the gallery when the page loads
+window.addEventListener('load', updateGallery);
