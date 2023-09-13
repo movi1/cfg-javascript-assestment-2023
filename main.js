@@ -55,61 +55,86 @@ function promptUser(imageName) {
 
 
 
-// run this code once the HTML and CSS are loaded
-document.addEventListener("DOMContentLoaded", function () {
-    // Select the element with the class name
-    let titles = document.getElementsByClassName("title");
-    // Loop through all the p tags and change their styling
-    for (let i = 0; i < titles.length; i++) {
-        titles[i].style.color = "#1a2328";
-    }
+// // run this code once the HTML and CSS are loaded
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Select the element with the class name
+//     let titles = document.getElementsByClassName("title");
+//     // Loop through all the p tags and change their styling
+//     for (let i = 0; i < titles.length; i++) {
+//         titles[i].style.color = "#1a2328";
+//     }
 
-    const imageInput = document.getElementById('imageInput');
-    const imageContainer = document.getElementById('imageContainer');
-    const errorMessage = document.getElementById('errorMessage');
-    const maxSizeInKB = 900; // 1MB in KB (adjust as needed)
+//     const imageInput = document.getElementById('imageInput');
+//     const imageContainer = document.getElementById('imageContainer');
+//     const errorMessage = document.getElementById('errorMessage');
+//     const maxSizeInKB = 900; // 1MB in KB (adjust as needed)
 
-    imageInput.addEventListener('change', () => {
-        const files = imageInput.files;
-        console.log(files[0])
-        const maxWidth = 900; // Maximum width for the displayed images
-
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.src = e.target.result;
-
-                    img.onload = () => {
-                        const scaleFactor = maxWidth / img.width;
-                        const thumbnailWidth = img.width * scaleFactor;
-                        const thumbnailHeight = img.height * scaleFactor;
-
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        canvas.width = thumbnailWidth;
-                        canvas.height = thumbnailHeight;
-                        ctx.drawImage(img, 0, 0, thumbnailWidth, thumbnailHeight);
-
-                        const thumbnailImage = new Image();
-                        thumbnailImage.src = canvas.toDataURL('image/jpeg', 0.7); // Convert to JPEG format (adjust quality as needed);
-                        thumbnailImage.style.maxWidth = '100%';
-                        thumbnailImage.style.height = 'auto';
-                        imageContainer.appendChild(thumbnailImage);
-
-                        // Get the image name and display the prompt
-                        const imageName = file.name;
-                        promptUser(imageName);
-                    };
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        // Clear the input value to allow selecting more files
-        imageInput.value = '';
-    });
+//     imageInput.addEventListener('change', () => {
+//         const file = imageInput.files[0];
+        
+//         if (file) {
+//           const reader = new FileReader();
+      
+//           reader.onload = e => {
+//             const img = new Image();
+//             img.src = e.target.result;
+      
+//             img.onload = () => {
+//               const canvas = document.createElement('canvas');
+//               const ctx = canvas.getContext('2d');
+      
+//               const maxWidth = 900;
+//               const scaleFactor = maxWidth / img.width;
+      
+//               canvas.width = img.width * scaleFactor; 
+//               canvas.height = img.height * scaleFactor;
+      
+//               ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+//               const thumbnail = new Image();
+//               thumbnail.src = canvas.toDataURL('image/jpeg', 0.7);
+//               thumbnail.style.maxWidth = '100%';
+//               thumbnail.style.height = 'auto';
+      
+//               imageContainer.appendChild(thumbnail);
+      
+//               promptUser(file.name);
+//             }
+//           };
+      
+//           reader.readAsDataURL(file);
+//         }
+      
+//         imageInput.value = '';
+//       });
 
     
+// });
+const input = document.getElementById('imageInput');
+const container = document.getElementById('gallery');
+
+input.addEventListener('change', function() {
+  let files = this.files;
+
+  console.log(files)
+  
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i];
+
+    let img = document.createElement('img');
+    img.setAttribute('width', '200');
+    img.setAttribute('height', '200');
+    // img.className = 'classnamehere';
+    img.src = URL.createObjectURL(file);
+
+    console.log(img.src)
+
+    let div = document.createElement('div');
+    div.textContent = file.name;
+
+    container.appendChild(img);
+    container.appendChild(div);
+
+    promptUser(file.name);
+  }
 });
