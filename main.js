@@ -3,14 +3,21 @@
 
 
 // Use a data structure like an array to store values - Gallery array to store uploaded images
-let gallery = ['./images/sea.jpg', './images/piano.JPG', './images/me.JPG', './images/bubblesea.jpg'];
+// let gallery = ['./images/sea.jpg', './images/piano.JPG', './images/me.JPG', './images/bubblesea.jpg'];
+
+
+
+// Use a data structure like an array to store values - Gallery array to store uploaded images
+let gallery = ['https://raw.githubusercontent.com/movi1/images/main/me200x200.JPG', 'https://raw.githubusercontent.com/movi1/images/main/bubblesea200x200.jpg',
+               'https://raw.githubusercontent.com/movi1/images/main/romi200x200.jpg',
+              'https://raw.githubusercontent.com/movi1/images/main/wave200x200.jpg'];
 
 
 let h1Elements = document.getElementsByClassName("title");
 
 for (let i = 0; i < h1Elements.length; i++) {
    // Make changes to the HTML or CSS using JavaScript
-  h1Elements[i].style.color = 	"#bf00ff";
+  h1Elements[i].style.color = 	"#bf00ff ";
 }
 
 // Use functions to make code reusable - Function to handle image upload and update the gallery
